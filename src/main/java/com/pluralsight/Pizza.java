@@ -23,13 +23,12 @@ public class Pizza extends MenuItem {
     public void addTopping(Topping topping) {
         toppings.add(topping);
     }
-
     public double getPrice() {
         double basePrice = switch (size.toLowerCase()) {
             case "personal" -> 8.50;
             case "medium" -> 12.00;
             case "large" -> 16.50;
-            default -> 10.00;
+            default -> 0.00;
         };
         if (stuffedCrust) basePrice += 2.00;
 
@@ -41,21 +40,29 @@ public class Pizza extends MenuItem {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(size)
-                .append(" Pizza (").append(crust).append(" crust");
+
+        sb.append(size).append(" Pizza (")
+                .append(crust).append(" crust");
+
         if (stuffedCrust) sb.append(", stuffed crust");
-        sb.append(") with ").append(sauce.getName()).append(" sauce\nToppings: ");
+
+        sb.append(") with ").append(sauce.getName()).append(" sauce")
+                .append("\nToppings: ");
 
         if (toppings.isEmpty()) {
             sb.append("none");
         } else {
             for (Topping topping : toppings) {
-                sb.append(topping.getName()).append(", ");
+                sb.append(topping.getName())
+                        .append(" ($")
+                        .append(String.format("%.2f", topping.getPrice()))
+                        .append("), ");
             }
-            sb.setLength(sb.length() - 2); // remove trailing comma
+            sb.setLength(sb.length() - 2); // remove comma + space
         }
 
-        sb.append(" - $").append(String.format("%.2f", getPrice()));
+        sb.append("\nTotal Price: $").append(String.format("%.2f", getPrice()));
+
         return sb.toString();
     }
 }
