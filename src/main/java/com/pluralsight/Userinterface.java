@@ -6,7 +6,7 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void display() {
-        System.out.println("Welcome to the Pizza Ordering System!");
+        System.out.println("🍕 Welcome to the Pizza Ordering System!");
 
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
@@ -30,7 +30,7 @@ public class UserInterface {
                 }
                 case 4 -> {
                     order.printReceipt();
-                    order.saveReceipt();
+                    FileManager.saveReceipt(order);
                     return;
                 }
                 default -> System.out.println("Invalid choice, try again!");
@@ -46,7 +46,10 @@ public class UserInterface {
         System.out.print("Stuffed crust? (yes/no): ");
         boolean stuffed = scanner.nextLine().equalsIgnoreCase("yes");
 
-        Pizza pizza = new Pizza(size, crust, stuffed);
+        System.out.print("Choose sauce (Tomato, Alfredo, BBQ): ");
+        Sauce sauce = new Sauce(scanner.nextLine());
+
+        Pizza pizza = new Pizza(size, crust, stuffed, sauce);
 
         while (true) {
             System.out.print("Add topping? (yes/no): ");
@@ -65,7 +68,6 @@ public class UserInterface {
         }
         return pizza;
     }
-
     public static void main(String[] args) {
         new UserInterface().display();
     }

@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Pizza {
     private String size;
@@ -8,11 +8,11 @@ public class Pizza {
     private boolean stuffedCrust;
     private List<Topping> toppings;
 
-    public Pizza(String size, String crust, boolean stuffedCrust) {
+    public Pizza(String size, String crust, boolean stuffedCrust, Sauce sauce) {
         this.size = size;
         this.crust = crust;
         this.stuffedCrust = stuffedCrust;
-        this.toppings = new ArrayList<>();
+        this.toppings = new List<>();
     }
 
     public void addTopping(Topping topping) {
