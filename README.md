@@ -28,8 +28,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
   - IntelliJ IDEA
 
 ## Demo
-
-![img.png](img.png)
+![Screenshot 2025-11-07 at 12.34.45 PM.png](Screenshot%202025-11-07%20at%2012.34.45%E2%80%AFPM.png)
 
 ## Future Work
 
