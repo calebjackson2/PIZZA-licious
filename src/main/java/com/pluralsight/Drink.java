@@ -1,11 +1,9 @@
 package com.pluralsight;
 
-import java.awt.*;
-
 public class Drink extends MenuItem {
     private String size;
 
-    public Drink(String name, String size) {
+    public Drink(String name) {
         super(name);
         this.size = size;
     }
@@ -18,6 +16,11 @@ public class Drink extends MenuItem {
             case "large" -> 3.00;
             default -> 2.00;
         };
+    }
+
+    @Override
+    public double calculatePrice() {
+        return 0;
     }
 
     @Override

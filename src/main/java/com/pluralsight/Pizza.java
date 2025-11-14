@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pizza extends MenuItem {
+public abstract class Pizza extends MenuItem {
     private String size;
     private String crust;
     private boolean stuffedCrust;

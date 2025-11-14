@@ -2,13 +2,13 @@ package com.pluralsight;
 
 public class RegularTopping extends Topping {
     public RegularTopping(String name) {
-        super(name, 0.00);  // Regular toppings free
+        super(name, 0.00);
     }
 }
  class MeatTopping extends Topping {
     private String size;
 
-    public MeatTopping(String name, String size) {
+    public MeatTopping(String name) {
         super(name, 0.00);  // Base price unused
         this.size = size.toLowerCase();
     }
@@ -29,7 +29,7 @@ public class RegularTopping extends Topping {
 class CheeseTopping extends Topping {
     private String size;
 
-    public CheeseTopping(String name, String size) {
+    public CheeseTopping(String name) {
         super(name, 0.00);  // Base price unused
         this.size = size.toLowerCase();
     }

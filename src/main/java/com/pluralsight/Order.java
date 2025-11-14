@@ -38,4 +38,13 @@ public class Order {
 
     public Customer getCustomer() { return customer; }
     public List<MenuItem> getItems() { return items; }
+
+    public void addPizza(Pizza pizza) {
+    }
+
+    public void addSide(GarlicKnots garlicKnots) {
+    }
+
+    public void addDrink(Drink drink) {
+    }
 }

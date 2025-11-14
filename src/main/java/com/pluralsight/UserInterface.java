@@ -26,7 +26,7 @@ public class UserInterface {
                 case 2 -> order.addSide(new GarlicKnots());
                 case 3 -> {
                     System.out.print("Enter drink name: ");
-                    order.addDrink(new Drinks(scanner.nextLine()));
+                    order.addDrink(new Drink(scanner.nextLine()));
                 }
                 case 4 -> {
                     order.printReceipt();
@@ -49,7 +49,12 @@ public class UserInterface {
         System.out.print("Choose sauce (Tomato, Alfredo, BBQ): ");
         Sauce sauce = new Sauce(scanner.nextLine());
 
-        Pizza pizza = new Pizza(size, crust, stuffed, sauce);
+        Pizza pizza = new Pizza(size, crust, stuffed, sauce) {
+            @Override
+            public double calculatePrice() {
+                return 0;
+            }
+        };
 
         while (true) {
             System.out.print("Add topping? (yes/no): ");

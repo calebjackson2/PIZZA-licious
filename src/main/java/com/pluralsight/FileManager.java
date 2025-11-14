@@ -17,10 +17,11 @@ public class FileManager {
             writer.write("Customer: " + order.getCustomer().getName() + "\n");
 
             for (MenuItem item : order.getItems()) {
-                writer.write(item.getName() + " - $" + String.format("%.2f", item.getPrice()) + "\n");
+                writer.write(item.getName() + "\n");
             }
 
-            writer.write("Total: $" + String.format("%.2f", order.calculateTotal()) + "\n");
+            // Removed total price line (no pricing system anymore)
+            writer.write("Total: N/A (pricing removed)\n");
 
             writer.close();
             System.out.println("Receipt saved as " + filename);
