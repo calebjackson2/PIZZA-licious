@@ -11,4 +11,10 @@ public abstract class Topping {
 
     public String getName() { return name; }
     public double getPrice() { return price; }
+
+    @Override
+    public String toString() {
+        return name + " ($" + String.format("%.2f", getPrice()) + ")";
+    }
 }
+

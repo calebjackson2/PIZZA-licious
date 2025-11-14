@@ -23,20 +23,25 @@ public abstract class Pizza extends MenuItem {
     public void addTopping(Topping topping) {
         toppings.add(topping);
     }
+
+    @Override
     public double getPrice() {
         double basePrice = switch (size.toLowerCase()) {
             case "personal" -> 8.50;
-            case "medium" -> 12.00;
-            case "large" -> 16.50;
-            default -> 0.00;
+            case "medium"   -> 12.00;
+            case "large"    -> 16.50;
+            default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
         };
+
         if (stuffedCrust) basePrice += 2.00;
 
         for (Topping topping : toppings) {
             basePrice += topping.getPrice();
         }
+
         return basePrice;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -58,7 +63,7 @@ public abstract class Pizza extends MenuItem {
                         .append(String.format("%.2f", topping.getPrice()))
                         .append("), ");
             }
-            sb.setLength(sb.length() - 2); // remove comma + space
+            sb.setLength(sb.length() - 2); 
         }
 
         sb.append("\nTotal Price: $").append(String.format("%.2f", getPrice()));

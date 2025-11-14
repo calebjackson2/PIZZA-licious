@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FileManager {
+
     public static void saveReceipt(Order order) {
         try {
             String filename = "receipt_" + LocalDateTime.now()
@@ -14,14 +15,16 @@ public class FileManager {
 
             FileWriter writer = new FileWriter(filename);
 
-            writer.write("Customer: " + order.getCustomer().getName() + "\n");
+            writer.write("Customer: " + order.getCustomer().getName() + "\n\n");
+            writer.write("----- ITEMS -----\n");
 
             for (MenuItem item : order.getItems()) {
-                writer.write(item.getName() + "\n");
+                writer.write(item.getName() + " - $" +
+                        String.format("%.2f", item.getPrice()) + "\n");
             }
 
-            // Removed total price line (no pricing system anymore)
-            writer.write("Total: N/A (pricing removed)\n");
+            writer.write("\n----- TOTAL -----\n");
+            writer.write("Total: $" + String.format("%.2f", order.calculateTotal()) + "\n");
 
             writer.close();
             System.out.println("Receipt saved as " + filename);

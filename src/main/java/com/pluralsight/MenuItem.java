@@ -7,16 +7,12 @@ public abstract class MenuItem {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public abstract double calculatePrice();
+    public abstract double getPrice();
 
     @Override
-    public abstract String toString();
-
-    public double getPrice() {
-        return 0;
+    public String toString() {
+        return name + " - $" + String.format("%.2f", getPrice());
     }
 }

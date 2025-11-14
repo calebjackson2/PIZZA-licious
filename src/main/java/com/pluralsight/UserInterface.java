@@ -6,7 +6,7 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     public void display() {
-        System.out.println("🍕 Welcome to the Pizza Ordering System!");
+        System.out.println("Welcome to the Pizza Ordering System!");
 
         System.out.print("Enter your name: ");
         String name = scanner.nextLine();
@@ -22,11 +22,11 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> order.addPizza(createPizza());
-                case 2 -> order.addSide(new GarlicKnots());
+                case 1 -> order.addItem(createPizza());
+                case 2 -> order.addItem(new GarlicKnots());
                 case 3 -> {
                     System.out.print("Enter drink name: ");
-                    order.addDrink(new Drink(scanner.nextLine()));
+                    order.addItem(new Drink(scanner.nextLine()));
                 }
                 case 4 -> {
                     order.printReceipt();
@@ -66,13 +66,14 @@ public class UserInterface {
             String type = scanner.nextLine();
 
             switch (type.toLowerCase()) {
-                case "meat" -> pizza.addTopping(new MeatTopping(toppingName));
-                case "cheese" -> pizza.addTopping(new CheeseTopping(toppingName));
+                case "meat" -> pizza.addTopping(new MeatTopping(toppingName, size));
+                case "cheese" -> pizza.addTopping(new CheeseTopping(toppingName, size));
                 default -> pizza.addTopping(new RegularTopping(toppingName));
             }
         }
         return pizza;
     }
+
     public static void main(String[] args) {
         new UserInterface().display();
     }
