@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -14,37 +15,31 @@ public class Order {
     }
 
     public void addItem(MenuItem item) {
-        items.add(item);
+        if (item != null) items.add(item);
     }
 
     public double calculateTotal() {
-        return items.stream()
-                .mapToDouble(MenuItem::getPrice)
-                .sum();
+        return Math.round(items.stream().mapToDouble(MenuItem::getPrice).sum() * 100.0) / 100.0;
     }
 
-    public void printReceipt() {
-        System.out.println("\n----- ORDER SUMMARY -----");
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("-------------------------");
+    public List<MenuItem> getItemsNewestFirst() {
+        List<MenuItem> copy = new ArrayList<>(items);
+        Collections.reverse(copy);
+        return copy;
+    }
 
+    public List<MenuItem> getItems() { return items; }
+    public Customer getCustomer() { return customer; }
+
+    public void printReceiptToConsole() {
+        System.out.println("\n----- ORDER SUMMARY -----");
+        System.out.println("Customer: " + customer.getName() + " | " + customer.getEmail());
+        System.out.println("-------------------------");
         for (MenuItem item : items) {
             System.out.println(" - " + item);
         }
-
-        System.out.println("\nTOTAL: $" + String.format("%.2f", calculateTotal()));
         System.out.println("-------------------------");
-    }
-
-    public Customer getCustomer() { return customer; }
-    public List<MenuItem> getItems() { return items; }
-
-    public void addPizza(Pizza pizza) {
-    }
-
-    public void addSide(GarlicKnots garlicKnots) {
-    }
-
-    public void addDrink(Drink drink) {
+        System.out.println("TOTAL: $" + String.format("%.2f", calculateTotal()));
+        System.out.println("-------------------------");
     }
 }

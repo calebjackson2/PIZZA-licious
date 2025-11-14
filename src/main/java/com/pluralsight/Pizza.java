@@ -3,71 +3,64 @@ package com.pluralsight;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class Pizza extends MenuItem {
-    private String size;
-    private String crust;
-    private boolean stuffedCrust;
-    private Sauce sauce;
-    private List<Topping> toppings;
+    protected String size;
+    protected String crust;
+    protected boolean stuffedCrust;
+    protected Sauce sauce;
+    protected List<Topping> toppings;
 
     public Pizza(String size, String crust, boolean stuffedCrust, Sauce sauce) {
-        super(size + " Pizza");
-        this.size = size;
-        this.crust = crust;
+        super((size == null ? "Pizza" : size + " Pizza"));
+        this.size = size == null ? "medium" : size;
+        this.crust = crust == null ? "regular" : crust;
         this.stuffedCrust = stuffedCrust;
-        this.sauce = sauce;
+        this.sauce = sauce == null ? new Sauce("Tomato") : sauce;
         this.toppings = new ArrayList<>();
     }
 
     public void addTopping(Topping topping) {
-        toppings.add(topping);
+        if (topping != null) toppings.add(topping);
     }
 
     @Override
     public double getPrice() {
-        double basePrice = switch (size.toLowerCase()) {
+        String s = (size == null) ? "" : size.toLowerCase(Locale.ROOT);
+        double basePrice = switch (s) {
             case "personal" -> 8.50;
-            case "medium"   -> 12.00;
-            case "large"    -> 16.50;
-            default -> throw new IllegalStateException("Unexpected value: " + size.toLowerCase());
+            case "medium" -> 12.00;
+            case "large" -> 16.50;
+            default -> 12.00;
         };
 
         if (stuffedCrust) basePrice += 2.00;
 
-        for (Topping topping : toppings) {
-            basePrice += topping.getPrice();
-        }
+        for (Topping t : toppings) basePrice += t.getPrice();
 
-        return basePrice;
+        return Math.round(basePrice * 100.0) / 100.0;
+    }
+
+    public String toppingsSummary() {
+        if (toppings.isEmpty()) return "none";
+        StringBuilder sb = new StringBuilder();
+        for (Topping t : toppings) {
+            sb.append(t.toString()).append(", ");
+        }
+        sb.setLength(sb.length() - 2);
+        return sb.toString();
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        return String.format("%s Pizza (%s crust%s) with %s sauce\nToppings: %s\nPrice: $%.2f",
+                capitalize(size), crust, (stuffedCrust ? ", stuffed crust" : ""),
+                sauce.getName(), toppingsSummary(), getPrice());
+    }
 
-        sb.append(size).append(" Pizza (")
-                .append(crust).append(" crust");
-
-        if (stuffedCrust) sb.append(", stuffed crust");
-
-        sb.append(") with ").append(sauce.getName()).append(" sauce")
-                .append("\nToppings: ");
-
-        if (toppings.isEmpty()) {
-            sb.append("none");
-        } else {
-            for (Topping topping : toppings) {
-                sb.append(topping.getName())
-                        .append(" ($")
-                        .append(String.format("%.2f", topping.getPrice()))
-                        .append("), ");
-            }
-            sb.setLength(sb.length() - 2); 
-        }
-
-        sb.append("\nTotal Price: $").append(String.format("%.2f", getPrice()));
-
-        return sb.toString();
+    private String capitalize(String s) {
+        if (s == null || s.isEmpty()) return s;
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 }
