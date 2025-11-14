@@ -1,0 +1,12 @@
+===== ORDER RECEIPT =====
+Customer: cj
+Email: cj12@gmail.com
+-------------------------
+
+Potato Knots - $5.00
+Seasoned Knots (red pepper + parmesan) - $5.00
+Garlic Knots - $4.00
+
+-------------------------
+TOTAL: $14.00
+=========================

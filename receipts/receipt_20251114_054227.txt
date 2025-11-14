@@ -1,0 +1,15 @@
+===== ORDER RECEIPT =====
+Customer: cj
+Email: cj12@yahoo.com
+-------------------------
+
+Large Pizza (thick crust) with Tomato sauce
+Toppings: Pepperoni (xl) - $1.50, Sausage (xl) - $1.50
+Price: $19.50
+Pepsi (Large) - $3.00
+Garlic Knots - $4.00
+Garlic Knots - $4.00
+
+-------------------------
+TOTAL: $30.50
+=========================
